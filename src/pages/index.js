@@ -1,12 +1,14 @@
 import React from "react"
 
 import Layout from "../containers/layout"
+import Weather from "../components/Weather/weather"
+import WeatherDetails from "../components/WeatherDetails/weatherDetails"
+
 
 const IndexPage = () => (
   <Layout>
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
+   <Weather/>
+   <WeatherDetails/>
   </Layout>
 )
 

@@ -1,0 +1,34 @@
+.wrapper{
+    display: flex;
+    place-items: center;
+    margin-top: 30vh;
+    margin-left: 10vw;
+    .degree {
+        font-size: 6rem;
+    }
+    .geo {
+        text-align: center;
+        margin-left: 2rem;
+        .city {
+            font-size: 4rem;
+            margin-bottom: 0;
+        }
+        .date {
+            font-size: 1.1rem;
+            font-weight: 100;
+            margin-top: 0;
+        }
+    }
+    .icon {
+        text-align: center;
+        margin-left: 2rem;
+        img{
+            width: 5rem;
+            height: auto;
+        }
+        .condition {
+            font-size: 1;
+            margin-top: 0;
+        }
+    } 
+}
