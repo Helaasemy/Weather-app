@@ -1,14 +1,12 @@
 import React from "react"
 
 import Layout from "../containers/layout"
-import Weather from "../components/Weather/weather"
-import WeatherDetails from "../components/WeatherDetails/weatherDetails"
+import Main from "../containers/main"
 
 
 const IndexPage = () => (
   <Layout>
-   <Weather/>
-   <WeatherDetails/>
+  <Main/>
   </Layout>
 )
 

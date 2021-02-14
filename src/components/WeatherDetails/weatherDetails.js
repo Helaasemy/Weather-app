@@ -1,9 +1,10 @@
-import PropTypes from "prop-types"
 import React from "react"
 
 import styles from "./weatherDetails.module.scss"
 
-const WeatherDetails = () => (
+const WeatherDetails = ({content}) => { 
+  console.log(`content: ${content}`);
+  return(
     <div className={styles.wrapper}>
       <div className={styles.content}>
         <h4>Weather Details</h4>
@@ -24,14 +25,10 @@ const WeatherDetails = () => (
         </div>
       </div>
     </div>
-)
+)}
 
-// WeatherDetails.propTypes = {
-//   siteTitle: PropTypes.string,
-// }
-
-// WeatherDetails.defaultProps = {
-//   siteTitle: ``,
-// }
+WeatherDetails.defaultProps = {
+  content: ``,
+}
 
 export default WeatherDetails

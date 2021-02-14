@@ -1,14 +1,17 @@
-import PropTypes from "prop-types"
 import React from "react"
 
+import {formatDate} from "../../utils"
 import styles from "./weather.module.scss"
 
-const Weather = () => (
+const Weather = ({ content }) => { 
+    const date = formatDate(content.dt)
+    const temp = parseInt(content.temp)
+    return (
     <div className={styles.wrapper}>
-        <h1 className={styles.degree}>16°</h1>
+        <h1 className={styles.degree}>{temp}°</h1>
         <div className={styles.geo}>
             <h1 className={styles.city}>London</h1>
-            <p className={styles.date}>06:20 | Monday, 9 Sep '21</p>
+            <p className={styles.date}>{date}</p>
         </div>
         <div className={styles.icon}>
             <img src="https://api.openweathermap.org/img/w/04n.png" alt="cloudy"/>
@@ -16,13 +19,11 @@ const Weather = () => (
         </div>
     </div>
 )
+}
 
-// Weather.propTypes = {
-//   siteTitle: PropTypes.string,
-// }
 
-// Weather.defaultProps = {
-//   siteTitle: ``,
-// }
+Weather.defaultProps = {
+    content: ``,
+}
 
 export default Weather
