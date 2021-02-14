@@ -10,45 +10,65 @@ import WeatherDetails from "../components/WeatherDetails/weatherDetails"
 
 
 const Main = () => {
+  const [loading, setLoading] = useState(true)
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
+  const [city, setCity] = useState("");
   const [currentWeather, setCurrentWeather] = useState({})
+  const [mainWeather, setMainWeather] = useState([])
   const [detailsData, SetDetailsData] = useState({})
 
   useEffect(() => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        setLatitude(position.coords.latitude)
-        setLongitude(position.coords.longitude)
-      },
-        function (error) {
-          if (error) {
-            const CurrentLocation = async () => {
-              const id = await publicIp.v4()
-              const geo = await ipLocation(id)
-              setLatitude(geo.latitude)
-              setLongitude(geo.longitude)
-            }
-            CurrentLocation()
+    // getting the ip address and user details 
+          const CurrentLocation = async () => {
+            const id = await publicIp.v4()
+            const geo = await ipLocation(id)
+            setLatitude(geo.latitude)
+            setLongitude(geo.longitude)
+            setCity(geo.city)
           }
-        }
-      );
-    }
+          CurrentLocation()
   }, [])
 
   useEffect(() => {
-    const fetchAll = async () => {
-      const weather = await fetchWeather(latitude, longitude)
-      setCurrentWeather(weather.current)
-      SetDetailsData(weather)
+    // fetching and setting data
+    if(latitude.length != 0 ) {
+      const fetchAll = async () => {
+        const weather = await fetchWeather(latitude, longitude)
+        setCurrentWeather(weather.current)
+        SetDetailsData(weather.daily[0])
+        setMainWeather(weather.current.weather[0])
+        setLoading(false)
+      }
+      fetchAll()
     }
-    fetchAll()
   }, [longitude])
-
+  
   return (
     <>
-      <Weather content={currentWeather} />
-      <WeatherDetails content={detailsData} />
+      {!loading ?
+        <>
+          <Weather
+            temp={currentWeather.temp}
+            city={city}
+            time={currentWeather.dt}
+            icon={mainWeather.icon}
+            weather={mainWeather.main}
+          />
+          {console.log(`${currentWeather.clouds}`)}
+          <WeatherDetails 
+            cloudy={currentWeather.clouds}
+            humidity={currentWeather.humidity}
+            wind={currentWeather.wind_speed}
+            sunrise={currentWeather.sunrise}
+            sunset={currentWeather.sunset}
+            nextDay={detailsData}
+            weather={detailsData.weather[0]}
+            temp={detailsData.temp}
+          />
+        </>
+        : 
+        <> loading...</>}
     </>
   )
 }
