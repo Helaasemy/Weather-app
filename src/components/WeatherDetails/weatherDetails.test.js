@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
-import Weather from './weather';
+import WeatherDetails from './weatherDetails';
 
 
 describe('<Weather/>', () => {
   it('should renders without errors', () => {
     const { container } = render(
-        <Weather />
+        <WeatherDetails />
     );
     expect(container.firstChild).toMatchSnapshot();
   });
