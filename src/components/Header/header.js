@@ -4,8 +4,7 @@ import React from "react"
 import styles from "./header.module.scss"
 
 const Header = ({ siteTitle }) => (
-  <header
-  >
+  <header>
     <div className={styles.header}>
       <h1>
           {siteTitle}
